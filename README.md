@@ -1,3 +1,10 @@
+# Caution: this is a fork of (/sqfmi/Watchy)
+
+Forked for:
+- experimentation
+- esp-rtc workaround (my rtc is broken, see branch esp-rtc-workaround )
+- analog clock (I love a very plain analog clock style, see branch plain-analog-clock )
+
 # Watchy - Fully Open Source E-Paper Watch
 
 ![Watchy](https://watchy.sqfmi.com/img/watchy_render.png)
