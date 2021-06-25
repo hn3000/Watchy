@@ -4,8 +4,8 @@ Original at [/sqfmi/Watchy](//github.com/sqfmi/Watchy)
 
 Forked for:
 - experimentation
-- esp-rtc workaround (my rtc is broken, see branch esp-rtc-workaround )
-- analog clock (I love a very plain analog clock style, see branch plain-analog-clock )
+- esp-rtc workaround (my rtc is broken, see branch [esp-rtc-workaround](//github.com/hn3000/Watchy/tree/esp-rtc-workaround) )
+- analog clock (I love a very plain analog clock style, see branch [plain-analog-clock](//github.com/hn3000/Watchy/tree/plain-analog-clock) )
 
 # Watchy - Fully Open Source E-Paper Watch
 
