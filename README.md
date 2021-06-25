@@ -1,6 +1,6 @@
 # Caution: this is a fork.
 
-Original at [/SQFMI/Watchy](//github.com/sqfmi/Watchy)
+Original at [/sqfmi/Watchy](//github.com/sqfmi/Watchy)
 
 Forked for:
 - experimentation
