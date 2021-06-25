@@ -1,4 +1,6 @@
-# Caution: this is a fork of (/sqfmi/Watchy)
+# Caution: this is a fork.
+
+Original at [SQFMI/Watchy](/sqfmi/Watchy)
 
 Forked for:
 - experimentation
