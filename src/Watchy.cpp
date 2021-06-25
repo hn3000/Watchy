@@ -1,4 +1,7 @@
 #include "Watchy.h"
+#include <soc/rtc.h>
+
+#define ESP_RTC 1
 
 DS3232RTC Watchy::RTC(false); 
 GxEPD2_BW<GxEPD2_154_D67, GxEPD2_154_D67::HEIGHT> Watchy::display(GxEPD2_154_D67(CS, DC, RESET, BUSY));
@@ -28,7 +31,19 @@ String getValue(String data, char separator, int index)
   return found>index ? data.substring(strIndex[0], strIndex[1]) : "";
 }
 
-Watchy::Watchy(){} //constructor
+Watchy::Watchy() {
+    // use more accurate clock source, as per
+    // https://discord.com/channels/804832182006579270/804834557412900885/856587881581641778
+    // (user SnoopJ in Watchy discord)
+    rtc_clk_slow_freq_set(RTC_SLOW_FREQ_8MD256);
+
+    // debug print
+    char buf[80];
+    sprintf(buf, "%d", rtc_clk_slow_freq_get());
+    Serial.print("rtc_clk_freq: ");
+    Serial.print(buf);
+    Serial.println();
+} //constructor
 
 void Watchy::init(String datetime){
     esp_sleep_wakeup_cause_t wakeup_reason;
@@ -82,7 +97,13 @@ void Watchy::deepSleep(){
   esp_sleep_enable_ext0_wakeup(RTC_PIN, 0); //enable deep sleep wake on RTC interrupt
   #endif  
   #ifdef ESP_RTC
-  esp_sleep_enable_timer_wakeup(60000000);
+  // original timeout:
+  // esp_sleep_enable_timer_wakeup(60000000);
+  // shortened to 1/100th of default:
+  //esp_sleep_enable_timer_wakeup(600000);
+
+  // measured: on my watchy, with sleep time of 600000, 1h ~ 5min
+  esp_sleep_enable_timer_wakeup(600000*12);
   #endif 
   esp_sleep_enable_ext1_wakeup(BTN_PIN_MASK, ESP_EXT1_WAKEUP_ANY_HIGH); //enable deep sleep wake on button press
   esp_deep_sleep_start();
