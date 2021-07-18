@@ -1,5 +1,13 @@
 #include <Watchy.h>
 
+#if 1  /* 0 for white on black*/
+#define FG_COLOR GxEPD_BLACK
+#define BG_COLOR GxEPD_WHITE
+#else
+#define FG_COLOR GxEPD_WHITE
+#define BG_COLOR GxEPD_BLACK
+#endif
+
 class AnalogWatchy: public Watchy {
   void drawWatchFace();
 };
@@ -11,9 +19,9 @@ void drawHand(
 
 void AnalogWatchy::drawWatchFace() {
     display.setFullWindow();
-    display.fillScreen(GxEPD_BLACK);
+    display.fillScreen(BG_COLOR);
     //display.setFont(&FreeMonoBold9pt7b);
-    //display.setLineColor(GxEPD_WHITE);
+    //display.setLineColor(FG_COLOR);
 
   int16_t minute = currentTime.Minute;
   int16_t hour = currentTime.Hour;
@@ -39,16 +47,16 @@ void drawHand(
   xe+=xc;
   ye+=yc;
 
-  //display.drawLine(xc, yc, xe, ye, GxEPD_WHITE);
-  display.fillTriangle(xc-xb, yc-yb, xc+xb, yc+yb, xe+xb, ye+yb, GxEPD_WHITE);
-  display.fillTriangle(xc-xb, yc-yb, xe+xb, ye+yb, xe-xb, ye-yb, GxEPD_WHITE);
+  //display.drawLine(xc, yc, xe, ye, FG_COLOR);
+  display.fillTriangle(xc-xb, yc-yb, xc+xb, yc+yb, xe+xb, ye+yb, FG_COLOR);
+  display.fillTriangle(xc-xb, yc-yb, xe+xb, ye+yb, xe-xb, ye-yb, FG_COLOR);
 
 }
 
 AnalogWatchy watchy;
 
 void setup() {
-  watchy.init();
+  //watchy.init(__DATE__ " " __TIME__);
 }
 
 void loop(){}
